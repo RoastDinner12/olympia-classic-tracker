@@ -160,7 +160,12 @@ export interface WorkoutExercise {
 export interface WorkoutSession {
   id: string;
   dayName: string;
-  split: 'Push (Chest/Shoulders/Triceps)' | 'Pull (Back/Rear Delts/Biceps)' | 'Legs (Quad Dominant)' | 'Legs (Ham/Glute Dominant)' | 'Upper Classic Aesthetics' | 'Rest / Active Recovery';
+  split: string;
+  sessionSlot?: 'AM' | 'PM';
+  stimulusType?: 'Mechanical Tension' | 'Hypertrophic Stretch' | 'Metabolic Stress' | 'Peak Contraction & Posing';
+  targetMuscleGroups?: string[];
+  oralPreWorkoutTaken?: boolean;
+  oralPreWorkoutTiming?: string;
   date: string;
   durationMinutes: number;
   completed: boolean;
@@ -228,3 +233,82 @@ export interface PeakWeekDay {
   completed: boolean;
 }
 
+export interface PedLibraryItem {
+  id: string;
+  name: string;
+  chemicalName: string;
+  tradeNames: string[];
+  category: 
+    | 'Testosterone & Esters'
+    | '19-Nor Anabolics'
+    | 'DHT Derivatives'
+    | 'Mass Orals'
+    | 'Growth Hormone & Peptides'
+    | 'Metabolic & Fat Burners'
+    | 'Insulin & Glucose Partitioning'
+    | 'Aromatase Inhibitors & SERMs'
+    | 'Prolactin & Neuro'
+    | 'Organ Support & Cardioprotection';
+  mappedCategory: 'AAS' | 'GH_Secretagogue' | 'Thyroid_FatBurner' | 'Ancillary_AI' | 'Organ_Support';
+  route: 'Intramuscular' | 'Subcutaneous' | 'Oral';
+  halfLife: string;
+  halfLifeDays: number;
+  anabolicRatio?: number;
+  androgenicRatio?: number;
+  aromatization: string;
+  hepatotoxicity: string;
+  typicalDose: string;
+  typicalFrequency: 'Every Day' | 'EOD' | 'Mon/Wed/Fri' | 'Twice Weekly' | 'Weekly' | 'As Needed';
+  unit: 'mg' | 'mcg' | 'IU';
+  defaultDoseNumber: string;
+  defaultTiming: 'AM' | 'PM' | 'Pre-Workout' | 'Pre-Bed' | 'Divided';
+  primaryApplication: string;
+  classicPhysiqueUtility: string;
+  organRiskProfile: string;
+  mandatoryAncillaries: string;
+}
+
+export interface StackRecommendationCompound {
+  name: string;
+  category: Compound['category'];
+  dose: string;
+  unit: Compound['unit'];
+  frequency: Compound['frequency'];
+  timing: Compound['timing'];
+  halfLifeDays: number;
+  route: Compound['route'];
+  notes: string;
+  isAncillary?: boolean;
+}
+
+export interface StackRecommendation {
+  id: string;
+  name: string;
+  subtitle: string;
+  phaseCategory: 'Mass_Accretion' | 'Recomp_Hardening' | 'Contest_Prep' | 'Health_Cruise';
+  goalType: 
+    | 'Raw Mass & Size'
+    | 'Strength & Power Detonator'
+    | 'Lean Recomp & 3D Hardening'
+    | 'Contest Prep Conditioning'
+    | 'Budget Friendly Mass'
+    | 'Gyno-Proof & Low Aromatization'
+    | 'Rapid 4-Week Plateau Buster'
+    | 'Joint Shield & Connective Repair'
+    | 'Health Restoration & Cruise';
+  experienceLevel: 
+    | 'Beginner / First Blast'
+    | 'Intermediate'
+    | 'Advanced'
+    | 'Elite / Olympian';
+  dosageTier: 'Low (<500mg/wk)' | 'Moderate (500-900mg/wk)' | 'Heavy (900-1400mg/wk)' | 'Extreme (>1400mg/wk)';
+  durationWeeks: number;
+  totalAasWeeklyMg: number;
+  description: string;
+  rationale: string;
+  targetWeightProgression: string;
+  aromatizationLevel: string;
+  organRiskLevel: string;
+  keyBenefits: string[];
+  compounds: StackRecommendationCompound[];
+}

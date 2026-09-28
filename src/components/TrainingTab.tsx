@@ -91,7 +91,8 @@ export const TrainingTab: React.FC = () => {
       cardioMinutes: sessionData.cardioMin,
       cardioType: 'Fasted Incline Treadmill',
       vacuumSeconds: sessionData.vacuumSeconds,
-      oralPreWorkoutTaken: sessionData.suggestedOralTiming,
+      oralPreWorkoutTaken: true,
+      oralPreWorkoutTiming: sessionData.suggestedOralTiming,
       exercises: sessionData.exercises.map(ex => ({
         ...ex,
         completed: completedExercises[ex.id] || true
